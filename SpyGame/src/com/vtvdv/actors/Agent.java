@@ -11,13 +11,14 @@ import com.vtvdv.utility.StatGenerator;
 public class Agent implements Actor{
 	StatGenerator statGen = new StatGenerator(); //Used to generate.
 	
-	//MAIN STATS
+	//INFO
 	private String name; //Agent's name.
 	private String gender; //Agent's name.
+	private String agencyName; //Agency agent works with.
 	
 	//RANGE BETWEEN 1-100
 	private int attack; //Agent's attack power (Higher is better).
-	private int deffence; //Agent's defence power, mitigates attack from others (Higher is better).
+	private int defence; //Agent's defence power, mitigates attack from others (Higher is better).
 	private int speed; //How fast agent can move between locations.
 	private int stealth; //Affects chance of agent being discovered.
 	private int health; //Current health of Agent.
@@ -43,8 +44,9 @@ public class Agent implements Actor{
 	
 	public Agent() {
 		name = "Place Holder";
+		agencyName = "None";
 		attack = statGen.getStat();
-		deffence = statGen.getStat();
+		defence = statGen.getStat();
 		speed = statGen.getStat();
 		stealth = statGen.getStat();
 		maxHealth = statGen.getStat();
@@ -72,12 +74,12 @@ public class Agent implements Actor{
 		this.attack = attack;
 	}
 
-	public int getDeffence() {
-		return deffence;
+	public int getDefence() {
+		return defence;
 	}
 
-	public void setDeffence(int deffence) {
-		this.deffence = deffence;
+	public void setDefence(int deffence) {
+		this.defence = deffence;
 	}
 
 	public int getSpeed() {
@@ -198,6 +200,14 @@ public class Agent implements Actor{
 
 	public void setExperience(int experience) {
 		this.experience = experience;
+	}
+
+	public String getAgencyName() {
+		return agencyName;
+	}
+
+	public void setAgencyName(String agencyName) {
+		this.agencyName = agencyName;
 	}
 	
 	

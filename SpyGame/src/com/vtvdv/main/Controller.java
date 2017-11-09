@@ -2,18 +2,20 @@ package com.vtvdv.main;
 
 import java.util.Random;
 
+import com.vtvdv.actors.ActorView;
 import com.vtvdv.actors.Agent;
 
 public class Controller {
 	
 	Random random = new Random();
+	ActorView view = new ActorView();
 	
 	public Agent fight(Agent attacker, Agent defender) { //Winner of fight is returned.
-		if(attacker.getAttack() == defender.getDeffence()) { // 50/50 on who wins, no deaths.
+		if(attacker.getAttack() == defender.getDefence()) { // 50/50 on who wins, no deaths.
 			return tieBreaker(attacker, defender);
 		}
-		else if(attacker.getAttack() < defender.getDeffence()) { //Defender wins.
-			if (attacker.getAttack() < defender.getDeffence()*2) {
+		else if(attacker.getAttack() < defender.getDefence()) { //Defender wins.
+			if (attacker.getAttack() < defender.getDefence()*2) {
 				die(attacker); //Attacker is overpowered and dies.
 			}
 			return defender;
