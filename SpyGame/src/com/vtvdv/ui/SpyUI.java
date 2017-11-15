@@ -5,6 +5,18 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.JTextPane;
+import java.awt.GridLayout;
+import javax.swing.JList;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
 
 public class SpyUI {
 
@@ -38,22 +50,41 @@ public class SpyUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 368);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		frame.getContentPane().add(tabbedPane);
 		
-		JTabbedPane mainTab = new JTabbedPane(JTabbedPane.TOP);
+		JPanel mainTab = new JPanel();
 		tabbedPane.addTab("Main", null, mainTab, null);
+		mainTab.setLayout(new BorderLayout(0, 0));
 		
-		JTabbedPane agentTab = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("Agents", null, agentTab, null);
+		JLabel agencyName = new JLabel("Agency: ");
+		mainTab.add(agencyName, BorderLayout.NORTH);
 		
-		JTabbedPane missionsTab = new JTabbedPane(JTabbedPane.TOP);
+		JPanel missionsTab = new JPanel();
 		tabbedPane.addTab("Missions", null, missionsTab, null);
 		
-		JTabbedPane mapTab = new JTabbedPane(JTabbedPane.TOP);
+		JPanel agentsTab = new JPanel();
+		tabbedPane.addTab("Agents", null, agentsTab, null);
+		agentsTab.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),}));
+		
+		JLabel agentsLabel = new JLabel("Double click on an Agent for information:");
+		agentsTab.add(agentsLabel, "2, 2, default, top");
+		
+		JList agentList = new JList();
+		agentsTab.add(agentList, "2, 4, fill, fill");
+		
+		JPanel mapTab = new JPanel();
 		tabbedPane.addTab("World Map", null, mapTab, null);
 	}
 
