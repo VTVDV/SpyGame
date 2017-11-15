@@ -22,18 +22,21 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 
 		while(scan.hasNext()) {
-			agencyName = scan.next();
+			agencyName = scan.nextLine();
 			while(agencyName == null || agencyName.isEmpty()) {
 				mainView.invalidName();
 				mainView.nameAgency();
 			}
+			break;
 		}
+		System.out.println("Exited name check");
 		
 		while(true) {
 			mainView.userPrompt();		
 			if(scan.hasNextInt()) {
 				while(scan.hasNextInt()) {
 					int i = scan.nextInt();
+					scan.nextLine();
 					switch(i) {
 					case 1: 
 						if(currentAgent != null) {
