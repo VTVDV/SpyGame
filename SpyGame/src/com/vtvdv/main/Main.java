@@ -15,9 +15,11 @@ public class Main {
 	static String agencyName;
 	static MainView mainView = new MainView();
 	
-	static Agent currentAgent; //Currently hired agent.
+	private static List<Agent> playerAgents; //Currently hired agent.
 	
 	public static void main(String[] args) throws IOException {
+		IO.main(null); //Generates list of names;
+		playerAgents = IO.getAgents();
 		
 		mainView.intro();
 		
@@ -29,7 +31,6 @@ public class Main {
 			mainView.invalidName();
 			mainView.nameAgency();
 		}
-		System.out.println("Exited name check");
 
 		mainView.userPrompt();
 		while(scan.hasNext()) {
@@ -37,8 +38,10 @@ public class Main {
 			scan.nextLine();
 			switch(i) {
 			case 1:
-				if(currentAgent != null) {
-					actorView.printAgentInfo(currentAgent);
+				if(playerAgents.size()==0) {
+					mainView.noAgents();
+				} else {
+					mainView.displayAgents(playerAgents);
 				}
 				break;
 			case 2:
@@ -48,11 +51,12 @@ public class Main {
 				mainView.noMissionsAvailable();
 				break;
 			case 4:
-				List<Agent> agents = new ArrayList<>();
-				for(int i2 = 0; i2 < 100; i2++) {
-					agents.add(new Agent());
-				}
-				IO.saveAgents(agents);
+				hiring();				
+				break;
+			case 5:
+				mainView.bye();
+				IO.saveAgents(playerAgents);
+				System.exit(0);
 				break;
 			default:
 				mainView.invalidInput();
@@ -60,6 +64,30 @@ public class Main {
 			}
 			mainView.userPrompt();
 		}
-		scan.close();
 	}
+		
+	public static void hiring() {
+		Agent agent = new Agent();
+		mainView.hireAgent(agent);
+		try(Scanner scan = new Scanner(System.in)) {
+			String response = scan.nextLine();
+			if(response.equalsIgnoreCase("y")) {
+				agent.setAgencyName(agencyName);
+				mainView.agentHired(agent, agencyName);
+			} else {
+				mainView.notHired(agent);
+			}
+			scan.close();
+		}
+	}
+
+	public List<Agent> getPlayerAgents() {
+		return playerAgents;
+	}
+
+	public void setPlayerAgents(List<Agent> playerAgents) {
+		this.playerAgents = playerAgents;
+	}
+	
+	
 }

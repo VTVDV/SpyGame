@@ -15,6 +15,7 @@ public class Agent implements Actor{
 	private String name; //Agent's name.
 	private String gender; //Agent's name.
 	private String agencyName; //Agency agent works with.
+	private String type = "Agent";
 	
 	//RANGE BETWEEN 1-100
 	private int attack; //Agent's attack power (Higher is better).
@@ -69,6 +70,10 @@ public class Agent implements Actor{
 
 	public String getType() {
 		return "Agent";
+	}
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public int getAttack() {
@@ -214,6 +219,8 @@ public class Agent implements Actor{
 	public void setAgencyName(String agencyName) {
 		this.agencyName = agencyName;
 	}
+	
+	
 	
 	
 	

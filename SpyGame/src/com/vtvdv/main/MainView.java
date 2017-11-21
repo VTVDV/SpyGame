@@ -1,5 +1,7 @@
 package com.vtvdv.main;
 
+import java.util.List;
+
 import com.vtvdv.actors.ActorView;
 import com.vtvdv.actors.Agent;
 
@@ -34,8 +36,15 @@ public class MainView {
 	}
 	
 	public void noAgents() {
-		System.out.println("You have no agent.");
+		System.out.println("You have no agents.");
 	}
+	
+	public void displayAgents(List<Agent> agents) {
+		for(Agent a: agents) {
+			actorView.printAgentInfo(a);
+		}
+	}
+	
 	
 	public void noMissions() {
 		System.out.println("You have no missions.");
@@ -54,5 +63,17 @@ public class MainView {
 		System.out.println("We have found the following agent for hire:");
 		actorView.printAgentInfo(agent);
 		System.out.println("Would you like to hire this agent?");
+	}
+	
+	public void agentHired(Agent agent, String agencyName) {
+		System.out.println(agent.getName() + " has joined " + agencyName);
+	}
+	
+	public void notHired(Agent agent) {
+		System.out.println(agent.getName() + " has not been hired.");
+	}
+	
+	public void bye() {
+		System.out.println("Good bye Director.");
 	}
 }
